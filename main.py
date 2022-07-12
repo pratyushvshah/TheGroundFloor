@@ -9,7 +9,6 @@ import threading
 import time
 from base64 import b64encode, b64decode
 from Crypto.Cipher import AES
-from requests import post
 import sqlalchemy as sql
 import filekeys
 
