@@ -48,11 +48,11 @@ This project is aimed towards creating a fast, secure, lightweight CLI for texti
 
 ### Features
 
-1. Login/Create user (Supporting hashing of password)
+1. Login/Create user (Supporting hashing of passwords)
 1. Notifications for friend requests and unread messages
 1. Sending friend requests, accepting/declining friend requests
 1. Removing friends
-1. Starting chatrooms (Supporting AES Encryption, Can only send messages to your friends)
+1. Starting chatrooms (Supporting AES Encryption, can only send messages to your friends)
 1. Plays a sound upon receiving a message
 1. Changing default settings (Number of messages displayed upon starting chat room, etc.)
 
