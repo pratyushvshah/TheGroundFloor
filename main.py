@@ -294,11 +294,19 @@ Hit 6 to quit
 --------------------------------------------Notifications------------------------------------------------------
 """, end="")
     if friendreqs[0]._asdict()["requests"] and unreadmsg:
-        print("You have new friend requests and unread messages!")
+        friendrequests = friendreqs[0]._asdict()["requests"].split(",")
+        unreadmessages = set()
+        for i in unreadmsg:
+            unreadmessages.add(i._asdict()["sender"])
+        print(f"You have {len(friendrequests)} new friend request(s) and unread messages from {len(unreadmessages)} user(s)!")
     elif friendreqs[0]._asdict()["requests"]:
-        print("You have new friend requests!")
+        friendrequests = friendreqs[0]._asdict()["requests"].split(",")
+        print(f"You have {len(friendrequests)} new friend request(s)!")
     elif unreadmsg:
-        print("You have new unread messages!")
+        unreadmessages = set()
+        for i in unreadmsg:
+            unreadmessages.add(i._asdict()["sender"])
+        print(f"You have new unread messages from {len(unreadmessages)} user(s)!")
     else:
         print("You have no notifications")
     while True:
