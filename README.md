@@ -61,7 +61,7 @@ This project is aimed towards creating a fast, secure, lightweight CLI for texti
 ### Built With
 
 1. Python
-1. PostgresSQL
+1. PostgreSQL
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
