@@ -13,6 +13,7 @@ from requests import post
 import sqlalchemy as sql
 import filekeys
 
+
 # Connects to database
 eng= sql.create_engine(f"{filekeys.postgresqllink}", isolation_level="AUTOCOMMIT")
 db = eng.connect()
