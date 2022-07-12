@@ -46,6 +46,16 @@
 
 This project is aimed towards creating a fast, secure, lightweight CLI for texting your friends. No more Mr. Zuckerberg stealing your data. The project makes use of multi-threading and PostgresSQL send and receive messages from 2 clients.
 
+### Features
+
+1. Login/Create user (Supporting hashing of password)
+1. Notifications for friend requests and unread messages
+1. Sending friend requests, accepting/declining friend requests
+1. Removing friends
+1. Starting chatrooms (Supporting AES Encryption, Can only send messages to your friends)
+1. Plays a sound upon receiving a message
+1. Changing default settings (Number of messages displayed upon starting chat room, etc.)
+
 <p align="right">(<a href="#top">back to top</a>)</p>
 
 ### Built With
