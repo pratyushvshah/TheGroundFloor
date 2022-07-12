@@ -136,7 +136,7 @@ Distributed under the MIT License. See `LICENSE.txt` for more information.
 <!-- CONTACT -->
 ## Contact
 
-Pratyush Shah - <a href = "mailto: abc@example.com">Email</a>, [LinkedIn](https://www.linkedin.com/in/pratyushvshah/)
+Pratyush Shah - <a href = "mailto: pratyushvshah@gmail.com">Email</a>, [LinkedIn](https://www.linkedin.com/in/pratyushvshah/)
 
 Project Link: [https://github.com/pratyushvshah/TheGroundFoor](https://github.com/pratyushvshah/TheGroundFoor)
 
