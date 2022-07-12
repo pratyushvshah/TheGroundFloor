@@ -70,8 +70,16 @@ This project is aimed towards creating a fast, secure, lightweight CLI for texti
 
 1. Use the `log.sql` file in the directory get the commands through which you can create your own database.
 1. You can host the database on a platform like [bit.io](https://bit.io/).
-1. After hosting the database, update the connection url in the `main.py` file on line 15.
-1. Update your secret keys on lines 20 - 22. The "encryptkey" and "iv" keys are used to encrypt and decrypt the messages and MUST be 16 bytes long.
+1. After hosting the database, Make a `filekeys.py` file in the directory and add the following lines:
+
+```python
+postgresqllink = "<YOUR POSTGRESQL DATABASE LINK>"
+referralkey = "<YOUR REFERRAL KEY>"
+encryptkey =  b"<YOUR ENCRYPTION KEY>"
+iv = b"<YOUR IV KEY>"
+```
+
+4. The "encryptkey" and "iv" keys are used to encrypt and decrypt the messages and MUST be 16 bytes long.
 1. Voila! You can now text your friends using this CLI. Just send the `main.py` file to your friends or you can convert it to a `.exe` file and send it as an application!
 
 ### Prerequisites

@@ -9,17 +9,19 @@ import threading
 import time
 from base64 import b64encode, b64decode
 from Crypto.Cipher import AES
+from requests import post
 import sqlalchemy as sql
+import filekeys
 
 # Connects to database
-eng= sql.create_engine('<YOUR POSTGRESQL CONNECTION LINK>', isolation_level="AUTOCOMMIT")
+eng= sql.create_engine(f"{filekeys.postgresqllink}", isolation_level="AUTOCOMMIT")
 db = eng.connect()
 
 
 # Secret keys
-referralkey = "<YOUR REFERRAL KEY>"
-encryptkey = b'<YOUR ENCRYPTION KEY>'
-iv = b'<YOUR IV KEY>'
+referralkey = filekeys.referralkey
+encryptkey = filekeys.encryptkey
+iv = filekeys.iv
 
 
 # Global variables
