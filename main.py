@@ -283,12 +283,12 @@ def menu(username, msg=None):
     updatesettings(username)
     print("""
 ----------------------------------------------MAIN MENU--------------------------------------------------------
-Hit 1 to initiate a chat (will they even reply?)
-Hit 2 to manage your friends (there for shits and giggles, you don't have any)
-Hit 3 to check your friend requests (spoiler alert: no one sent you a friend request)
-Hit 4 to check unread messages (cute you think someone sent you a message)
-Hit 5 to open settings (just use defaults smh, I know better)
-Hit 6 to quit (please don't come back)
+Hit 1 to initiate a chat
+Hit 2 to manage your friends
+Hit 3 to check your friend requests
+Hit 4 to check unread messages
+Hit 5 to open settings
+Hit 6 to quit
 """, end="")
     print("""
 --------------------------------------------Notifications------------------------------------------------------
@@ -531,7 +531,7 @@ def manage_friends(username):
 
     # Error handling for when the user doesn't have any friends
     if friends[0]._asdict()["friends"] == None or friends[0]._asdict()["friends"] == "":
-        print("You have no friends (who would've known?)")
+        print("You have no friends")
     
     # Printing the user's friends
     else:
@@ -838,7 +838,7 @@ def friendreq(username):
     
     # If no requests, print message
     if friendrequests == None or friendrequests == "":
-        print("No friend requests (shocker)")
+        print("No friend requests")
         while True:
             choice = input("Hit any key to return to menu\n")
             clear()
@@ -960,7 +960,7 @@ Hit 9 to return to the menu
                 
                 # Error message if the user's choice has not sent them a request
                 else:
-                    print("This user has not sent you a friend request (no surprises there)")
+                    print("This user has not sent you a friend request")
                     continue 
 
             # Rejecting friend request               
@@ -1013,7 +1013,7 @@ Hit 9 to return to the menu
                 
                 # Error handling if the user's choice has not sent them a request
                 else:
-                    print("This user has not sent you a friend request (no surprises there)")
+                    print("This user has not sent you a friend request")
                     continue
             
             # Error handling if the user's choice is invalid
@@ -1073,7 +1073,7 @@ Hit 9 to return to the menu
                     print("Invalid input: " + choice)
                     continue
     else:
-        print("No one sent you a message lol")
+        print("No one sent you a message")
         input("Hit any key to return to the menu")
         clear()
         menu(username)
