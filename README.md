@@ -44,7 +44,7 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-This project is aimed towards creating a fast, secure, lightweight CLI for texting your friends. No more Mr. Zuckerberg stealing your data. The project makes use of multi-threading and PostgresSQL send and receive messages from 2 clients.
+This project is aimed towards creating a fast, secure, lightweight CLI for texting your friends. No more Mr. Zuckerberg stealing your data. The project makes use of multi-threading and PostgresSQL to send and receive messages from 2 clients.
 
 ### Features
 
