@@ -130,7 +130,7 @@ Don't forget to give the project a star! Thanks again!
 <!-- DISCLAIMER -->
 ## Disclaimer
 
-None of the contributors of TheGroundFloor, in any way whatsoever, can be responsible for your use of the code, CLI, or the website.
+None of the contributors of TheGroundFloor, in any way whatsoever, can be responsible for your use of the code or the CLI.
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
