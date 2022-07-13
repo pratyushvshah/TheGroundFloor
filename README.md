@@ -33,7 +33,7 @@
       </ul>
     </li>
     <li><a href="#usage">Usage</a></li>
-    <li><a href="#roadmap">Roadmap</a></li>
+    <li><a href="#roadmap">TODO</a></li>
     <li><a href="#contributing">Contributing</a></li>
     <li><a href="#disclaimer">Disclaimer</a></li>
     <li><a href="#license">License</a></li>
@@ -99,7 +99,7 @@ There's no instructions, just run `main.py` in your terminal and follow the inst
 <p align="right">(<a href="#top">back to top</a>)</p>
 
 <!-- ROADMAP -->
-## Roadmap
+## TODO
 
 - [ ] Remember the user so they don't have to log in again (after converting `main.py` to an .exe file)
 - [ ] Allow sending images, videos, and audio files to your friends.
