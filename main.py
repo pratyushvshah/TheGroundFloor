@@ -1256,6 +1256,7 @@ def custom_excepthook(exc_type, exc_value, exc_traceback):
         for line in format_exception:
             logging.error(repr(line.strip()))
 
+
 # Override the default exception handling
 sys.excepthook = custom_excepthook
 
