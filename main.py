@@ -1257,9 +1257,8 @@ def custom_excepthook(exc_type, exc_value, exc_traceback):
             logging.error(repr(line.strip()))
 
 
-# Override the default exception handling
-sys.excepthook = custom_excepthook
-
-
 if __name__ == "__main__":
+
+    # Override the default exception handling
+    sys.excepthook = custom_excepthook
     main()
