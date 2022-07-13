@@ -11,6 +11,8 @@ from base64 import b64encode, b64decode
 from Crypto.Cipher import AES
 import sqlalchemy as sql
 import filekeys
+import logging
+import traceback
 
 
 # Connects to database
@@ -422,7 +424,6 @@ def getmessages(username, friend):
 
         # Database query to get messages between user and friend
         messages = db.execute("SELECT * FROM messages WHERE (Sender = %s AND Receiver = %s AND Print = 0) OR (Sender = %s AND Receiver = %s AND Read = 0) ORDER BY Time", username, friend, friend, username).fetchall()
-        
 
         # Print messages
         if messages:
@@ -1236,7 +1237,28 @@ def custominput():
         except:
             continue
         string += key.decode()
-        
+
+
+# Error logger
+def custom_excepthook(exc_type, exc_value, exc_traceback):
+
+    # Do not print exception when user cancels the program
+    if issubclass(exc_type, KeyboardInterrupt):
+        sys.__excepthook__(exc_type, exc_value, exc_traceback)
+        return
+    logging.basicConfig(filename = "ErrorLog.txt", level = logging.DEBUG)
+    logging.error("An uncaught exception occurred:")
+    logging.error("Type: %s", exc_type)
+    logging.error("Value: %s", exc_value)
+
+    if exc_traceback:
+        format_exception = traceback.format_tb(exc_traceback)
+        for line in format_exception:
+            logging.error(repr(line.strip()))
+
+# Override the default exception handling
+sys.excepthook = custom_excepthook
+
 
 if __name__ == "__main__":
     main()
