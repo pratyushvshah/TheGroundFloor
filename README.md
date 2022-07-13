@@ -25,7 +25,6 @@
     <li><a href="#usage">Usage</a></li>
     <li><a href="#todo">TODO</a></li>
     <li><a href="#contributing">Contributing</a></li>
-    <li><a href="#disclaimer">Disclaimer</a></li>
     <li><a href="#license">License</a></li>
     <li><a href="#contact">Contact</a></li>
   </ol>
@@ -114,13 +113,6 @@ Don't forget to give the project a star! Thanks again!
 3. Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
 4. Push to the Branch (`git push origin feature/AmazingFeature`)
 5. Open a Pull Request
-
-<p align="right">(<a href="#top">back to top</a>)</p>
-
-<!-- DISCLAIMER -->
-## Disclaimer
-
-None of the contributors of TheGroundFloor, in any way whatsoever, can be responsible for your use of the code or the CLI and are not liable for damages of any form.
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
