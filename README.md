@@ -55,6 +55,7 @@ This project is aimed towards creating a fast, secure, lightweight CLI for texti
 1. Starting chatrooms (Supporting AES Encryption, can only send messages to your friends)
 1. Plays a sound upon receiving a message
 1. Changing default settings (Number of messages displayed upon starting chat room, etc.)
+1. Strong error logging to help with future debugging
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
