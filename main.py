@@ -3,7 +3,7 @@ import hashlib
 import msvcrt
 import sys
 import re
-from datetime import datetime
+from datetime import datetime, timezone
 from dateutil import tz
 import threading
 import time
@@ -101,7 +101,7 @@ def login(msg=None):
         password = input("Password: ")
 
         # Retrieves the user's information from the database
-        user = db.execute('SELECT * FROM users WHERE username = %s', (username,)).all()[0]._asdict()
+        user = db.execute('SELECT * FROM users WHERE username = %s', username).fetchall()[0]._asdict()
 
         # Checks if the user exists
         if user:
@@ -110,6 +110,19 @@ def login(msg=None):
             if password == user["password"]:
                 clear()
                 banner()
+
+                # Updates database to reflect when the user last logged in
+                db.execute("UPDATE users SET lastlogin = %s WHERE username = %s", datetime.now(timezone.utc).strftime('%Y-%m-%d %H:%M:%S'), username)
+                
+                # Error checking for when user is not in necessary tables within the database
+                settings = db.execute('SELECT * FROM chatsettings WHERE username = %s', username).fetchall()
+                if settings == []:
+                    db.execute('INSERT INTO chatsettings (Username) VALUES (%s)', username)
+                friends = db.execute('SELECT * FROM chatfriends WHERE username = %s', username).fetchall()
+                if friends == []:
+                    db.execute('INSERT INTO chatfriends (Username) VALUES (%s)', username)
+                
+                # Updates the users settings
                 updatesettings(username)
                 menu(username)
             else:
