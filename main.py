@@ -16,7 +16,7 @@ import traceback
 
 
 # Connects to database
-eng= sql.create_engine(f"{filekeys.postgresqllink}", isolation_level="AUTOCOMMIT")
+eng= sql.create_engine(f"{filekeys.postgresqluri}", isolation_level="AUTOCOMMIT")
 db = eng.connect()
 
 

@@ -63,7 +63,7 @@ TheGroundFloor™ is aimed towards creating a fast, secure, lightweight CLI for 
 1. After hosting the database, Make a `filekeys.py` file in the directory and add the following lines:
 
 ```python
-postgresqllink = "<YOUR POSTGRESQL DATABASE LINK>"
+postgresqluri = "<YOUR POSTGRESQL DATABASE URI>"
 referralkey = "<YOUR REFERRAL KEY>"
 encryptkey =  b"<YOUR ENCRYPTION KEY>"
 iv = b"<YOUR IV KEY>"
