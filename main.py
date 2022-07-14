@@ -110,6 +110,7 @@ def login(msg=None):
             if password == user["password"]:
                 clear()
                 banner()
+                updatesettings(username)
                 menu(username)
             else:
                 print("Invalid credentials")
@@ -230,6 +231,8 @@ Please login to continue using the application.
 def updateCredentials(fullname, email, username, password, salt):
 
     db.execute("INSERT INTO users (Fullname, Email, Username, Password, Salt) VALUES (%s, %s, %s, %s, %s)", fullname, email, username, password, salt)
+    db.execute("INSERT INTO chatfriends (Username) VALUES (%s)", username)
+    db.execute("INSERT INTO chatsettings (Username) VALUES (%s)", username)
 
 
 # Creates hex of a password
@@ -282,9 +285,8 @@ def decrypt(message):
 def menu(username, msg=None):
     if msg != None:
         print(msg)
-    unreadmsg = db.execute("SELECT Sender FROM messages WHERE Receiver = %s AND Read = 0", username).fetchall()
-    friendreqs = db.execute('SELECT Requests FROM users WHERE username = %s', username).fetchall()
-    updatesettings(username)
+    unreadmsg = db.execute("SELECT Sender FROM chatmessages WHERE Receiver = %s AND Read = 0", username).fetchall()
+    friendreqs = db.execute('SELECT Requests FROM chatfriends WHERE username = %s', username).fetchall()
     print("""
 ----------------------------------------------MAIN MENU--------------------------------------------------------
 Hit 1 to initiate a chat
@@ -344,7 +346,7 @@ Hit 6 to quit
                         continue
 
                     # Database query to get the friend's data
-                    verify_friend = db.execute('SELECT * FROM users WHERE Username = %s', friend).fetchall()
+                    verify_friend = db.execute('SELECT * FROM chatfriends WHERE Username = %s', friend).fetchall()
                     if verify_friend:
                         check = verify_friend[0]._asdict()["friends"]
 
@@ -423,7 +425,7 @@ def getmessages(username, friend):
     while END == False:
 
         # Database query to get messages between user and friend
-        messages = db.execute("SELECT * FROM messages WHERE (Sender = %s AND Receiver = %s AND Print = 0) OR (Sender = %s AND Receiver = %s AND Read = 0) ORDER BY Time", username, friend, friend, username).fetchall()
+        messages = db.execute("SELECT * FROM chatmessages WHERE (Sender = %s AND Receiver = %s AND Print = 0) OR (Sender = %s AND Receiver = %s AND Read = 0) ORDER BY Time", username, friend, friend, username).fetchall()
 
         # Print messages
         if messages:
@@ -448,9 +450,6 @@ def getmessages(username, friend):
                 # Decrypts the message
                 decryptmessage = decrypt(message._asdict()["message"])
                 print(f"{localtime} {message._asdict()['sender']}: {decryptmessage}", flush = True)
-
-                # To not overload the program
-                time.sleep(0.01)
             
             # Set printing variable to false after messages are printed
             time.sleep(0.1)
@@ -475,7 +474,7 @@ Hit 9 to return to the menu
     num = LASTMESSAGES
 
     # Database queries to get messages between the two users and updating print and read flag columns
-    initialmessage = db.execute(f"SELECT * FROM messages WHERE (Sender = %s AND Receiver = %s) OR (Sender = %s AND Receiver = %s) ORDER BY Time DESC LIMIT {num}", username, friend, friend, username).fetchall()
+    initialmessage = db.execute(f"SELECT * FROM chatmessages WHERE (Sender = %s AND Receiver = %s) OR (Sender = %s AND Receiver = %s) ORDER BY Time DESC LIMIT {num}", username, friend, friend, username).fetchall()
     db.execute(f"UPDATE messages SET Read = 1 WHERE Sender = %s AND Receiver = %s", friend, username)
     db.execute("UPDATE messages SET Print = 1 WHERE Sender = %s AND Receiver = %s", username, friend)
     
@@ -538,7 +537,7 @@ def manage_friends(username):
 """)
 
     # Gets the user's friends from the database
-    friends = db.execute('SELECT * FROM users WHERE username = %s', username).fetchall()
+    friends = db.execute('SELECT * FROM chatfriends WHERE username = %s', username).fetchall()
 
     # Error handling for when the user doesn't have any friends
     if friends[0]._asdict()["friends"] == None or friends[0]._asdict()["friends"] == "":
@@ -589,8 +588,8 @@ def add_friend(username):
             continue
 
         # Database requests
-        frienduser = db.execute('SELECT * FROM users WHERE Username = %s', friend).fetchall()
-        user = db.execute('SELECT * FROM users WHERE Username = %s', username).fetchall()
+        frienduser = db.execute('SELECT * FROM chatfriends WHERE Username = %s', friend).fetchall()
+        user = db.execute('SELECT * FROM chatfriends WHERE Username = %s', username).fetchall()
 
         # Making arrays from friend's data for error checks
         if frienduser:
@@ -694,7 +693,7 @@ def add_friend(username):
                     i += 1
                 
                 # Updating the friend's requests array in the database
-                db.execute('UPDATE users SET Requests = %s WHERE Username = %s', friendlist, friend)
+                db.execute('UPDATE chatfriends SET Requests = %s WHERE Username = %s', friendlist, friend)
                 print(f"You have successfully sent {friend} a friend request")
 
                 # Prompting the user to continue
@@ -744,8 +743,8 @@ def remove_friend(username):
             continue
 
         # Database queries
-        frienduser = db.execute('SELECT * FROM users WHERE Username = %s', friend).fetchall()
-        user = db.execute('SELECT * FROM users WHERE Username = %s', username).fetchall()
+        frienduser = db.execute('SELECT * FROM chatfriends WHERE Username = %s', friend).fetchall()
+        user = db.execute('SELECT * FROM chatfriends WHERE Username = %s', username).fetchall()
         currentfriends = user[0]._asdict()['friends']
 
         # Clean up the current friends
@@ -794,8 +793,8 @@ def remove_friend(username):
                         j += 1
 
                 # Update the database with new friend lists
-                db.execute('UPDATE users SET Friends = %s WHERE Username = %s', friendsfriendlist, friend)
-                db.execute('UPDATE users SET Friends = %s WHERE Username = %s', friendlist, username)
+                db.execute('UPDATE chatfriends SET Friends = %s WHERE Username = %s', friendsfriendlist, friend)
+                db.execute('UPDATE chatfriends SET Friends = %s WHERE Username = %s', friendlist, username)
 
                 # Print confirmation message
                 print(f"{friend} has been removed from your friends")
@@ -837,7 +836,7 @@ def friendreq(username):
 """)
 
     # Database query to get data on user
-    requests = db.execute('SELECT * FROM users WHERE Username = %s', username).fetchall()
+    requests = db.execute('SELECT * FROM chatfriends WHERE Username = %s', username).fetchall()
     friendrequests = requests[0]._asdict()["requests"]
     currentfriends = requests[0]._asdict()["friends"]
 
@@ -904,10 +903,10 @@ Hit 9 to return to the menu
                         i += 1
 
                     # Updates the user's friend list
-                    db.execute('UPDATE users SET Friends = %s WHERE Username = %s', friendlist, username)
+                    db.execute('UPDATE chatfriends SET Friends = %s WHERE Username = %s', friendlist, username)
                     
                     # Database query to get data on friend
-                    friendrequest = db.execute('SELECT * FROM users WHERE Username = %s', choice).fetchall()
+                    friendrequest = db.execute('SELECT * FROM chatfriends WHERE Username = %s', choice).fetchall()
                     friendscurrentfriends = friendrequest[0]._asdict()["friends"]
                     
                     # Cleans up current friends of friend
@@ -930,7 +929,7 @@ Hit 9 to return to the menu
                         i += 1
 
                     # Updates the friend's friend list
-                    db.execute('UPDATE users SET Friends = %s WHERE Username = %s', friendlist, choice)
+                    db.execute('UPDATE chatfriends SET Friends = %s WHERE Username = %s', friendlist, choice)
 
                     # Deletes the request from the user's friend requests list
                     friendrequests.remove(choice)
@@ -947,7 +946,7 @@ Hit 9 to return to the menu
                             i += 1
 
                     # Updates the user's friend requests list
-                    db.execute('UPDATE users SET Requests = %s WHERE Username = %s', requestlist, username)
+                    db.execute('UPDATE chatfriends SET Requests = %s WHERE Username = %s', requestlist, username)
                     
                     # Prints confirmation message
                     print(f"{choice} has been added to your friends!")
@@ -1000,7 +999,7 @@ Hit 9 to return to the menu
                             i += 1
 
                     # Updates the user's friend requests list
-                    db.execute('UPDATE users SET Requests = %s WHERE Username = %s', requestlist, username)
+                    db.execute('UPDATE chatfriends SET Requests = %s WHERE Username = %s', requestlist, username)
                     
                     # Prints confirmation message
                     print(f"{choice} removed from friend requests.")
@@ -1047,7 +1046,7 @@ def unread(username):
 """)
 
     # Gets the user's data from message database
-    users = db.execute('SELECT * FROM messages WHERE Receiver = %s AND Read = 0', username).fetchall()
+    users = db.execute('SELECT * FROM chatmessages WHERE Receiver = %s AND Read = 0', username).fetchall()
 
     # Error handling for when the user has not received a message
     if users:
@@ -1094,16 +1093,17 @@ Hit 9 to return to the menu
 def settings(username):
     print("""
 ---------------------------------------------------SETTINGS----------------------------------------------------
-Hit 1 to change the number of messages you see per page
+Hit 1 to change the number of messages loaded when you start a chat
 Hit 9 to return to the menu
 """)
     choice = input("")
     if choice == '1':
+        print(f"Your current setting shows you {LASTMESSAGES} messages when you start a chat.")
 
         # Prompt the user to enter 
         while True:
             try:
-                num = int(input("Enter the number of messages you want to see per page: "))
+                num = int(input("Enter the number of messages you want to load when you start a chat: "))
                 if num > 0:
                     break
                 else:
@@ -1113,8 +1113,7 @@ Hit 9 to return to the menu
                 msg = "Please enter a number"
         
         # Update the user's settings
-        db.execute('UPDATE users SET NumMessages = %s WHERE Username = %s', num, username)
-        updatesettings(username)
+        db.execute('UPDATE chatsettings SET NumMessages = %s WHERE Username = %s', num, username)
         print(f"Number of messages changed to {num}")
 
         # Asks if the user wants to return to the menu
@@ -1145,16 +1144,7 @@ Hit 9 to return to the menu
 # Updates global variables for user settings
 def updatesettings(username):
     global LASTMESSAGES
-    LASTMESSAGES = db.execute('SELECT NumMessages FROM users WHERE Username = %s', username).fetchall()[0]._asdict()["nummessages"]
-
-
-# SETTINGS FUNCTION - Num of messages
-def nummsg(username):
-
-    # Gets the user's settings for the number of messages they want to see per page
-    num = db.execute('SELECT NumMessages FROM users WHERE Username = %s', username).fetchall()
-    num = num[0]._asdict()["nummessages"]
-    return int(num)
+    LASTMESSAGES = db.execute('SELECT NumMessages FROM chatsettings WHERE Username = %s', username).fetchall()[0]._asdict()["nummessages"]
 
 
 # Custom input for chat function that does not block execution (standard input function blocks execution of block)

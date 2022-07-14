@@ -3,14 +3,17 @@ CREATE TABLE users(
     Fullname TEXT NOT NULL,
     Email TEXT NOT NULL,
     Username TEXT NOT NULL,
-    Friends TEXT,
-    Requests TEXT,
     Password TEXT NOT NULL,
     Salt TEXT NOT NULL,
-    NumMessages INT DEFAULT 10
 );
 
-CREATE TABLE messages(
+CREATE TABLE chatfriends(
+    Username TEXT NOT NULL,
+    Friends TEXT DEFAULT NULL,
+    Requests TEXT DEFAULT NULL
+)
+
+CREATE TABLE chatmessages(
     ID  SERIAL PRIMARY KEY,
     Sender TEXT NOT NULL,
     Receiver TEXT NOT NULL,
@@ -19,3 +22,8 @@ CREATE TABLE messages(
     Print INTEGER DEFAULT 0,
     Time TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
+
+CREATE TABLE chatsettings(
+    Username TEXT NOT NULL,
+    NumMessages INT DEFAULT 10
+)
