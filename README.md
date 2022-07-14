@@ -91,7 +91,6 @@ There's no instructions, just run `main.py` in your terminal and follow the inst
 <!-- ROADMAP -->
 ## TODO
 
-- [ ] Remember the user so they don't have to log in again (after converting `main.py` to an .exe file)
 - [ ] Allow sending images, videos, and audio files to your friends.
 - [ ] Make the UI more friendly and add color.
 - [ ] Add a way to send messages to a group.
