@@ -44,7 +44,7 @@ def main(msg=None):
     while True:
         choice = input("""
 Hit 1 to Login
-Hit 2 to Register an account with The GroundFloor™ 
+Hit 2 to Register an account with TheGroundFloor™ 
 """).strip()
         if choice == "1":
             clear()
@@ -84,7 +84,7 @@ def banner():
    █|█|█|  █|    █|    █|█|      █|█|    █|      █|  █|█|█|    █|        █|█|█|█|    █|█|      █|█|    █|    █|  
                                                                                                                  
 
---------------------------------------------WELCOME TO GroundFloor™--------------------------------------------
+--------------------------------------------WELCOME TO TheGroundFloor™--------------------------------------------
            We are a highly secure messaging service, say goodbye to Zuckerberg stealing your data!
 """, end="")
 
@@ -232,7 +232,7 @@ Password must follow the following criteria:
     salt, password = hashpass(password)
     updateCredentials(fullname, email, username, password, salt)
     msg = """
-Thank you for registering with GroundFloor™.
+Thank you for registering with TheGroundFloor™.
 Please login to continue using the application.
 """
     clear()
@@ -426,7 +426,7 @@ Hit 6 to quit
                 clear()
                 banner()
                 sys.exit("""
-                                      Thank you for using GroundFloor™!
+                                      Thank you for using TheGroundFloor™!
 """)
 
 

@@ -7,7 +7,7 @@
     <img src="logo.ico" alt="Logo" width="80" height="80">
   </a>
 
-<h3 align="center">The GroundFloor™</h3>
+<h3 align="center">TheGroundFloor™</h3>
 
   <p align="center">
     A CLI for texting your friends
@@ -33,7 +33,7 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-This project is aimed towards creating a fast, secure, lightweight CLI for texting your friends. No more Mr. Zuckerberg stealing your data. The project makes use of multi-threading and PostgreSQL to send and receive messages from 2 clients.
+TheGroundFloor™ is aimed towards creating a fast, secure, lightweight CLI for texting your friends. No more Mr. Zuckerberg stealing your data. The project makes use of multi-threading and PostgreSQL to send and receive messages from 2 clients.
 
 ### Features
 
