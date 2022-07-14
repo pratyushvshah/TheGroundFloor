@@ -91,9 +91,9 @@ There's no instructions, just run `main.py` in your terminal and follow the inst
 <!-- ROADMAP -->
 ## TODO
 
-- [ ] Allow sending images, videos, and audio files to your friends.
+- [ ] Allow sending images and audio files to your friends.
 - [ ] Make the UI more friendly and add color.
-- [ ] Add a way to send messages to a group.
+- [ ] Have the notifications autoupdate.
 
 See the [open issues](https://github.com/pratyushvshah/TheGroundFoor/issues) for a full list of proposed features (and known issues).
 
