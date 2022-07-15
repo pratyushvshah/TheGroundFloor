@@ -101,10 +101,11 @@ def login(msg=None):
         password = input("Password: ")
 
         # Retrieves the user's information from the database
-        user = db.execute('SELECT * FROM users WHERE username = %s', username).fetchall()[0]._asdict()
+        user = db.execute('SELECT * FROM users WHERE username = %s', username).fetchall()
 
         # Checks if the user exists
         if user:
+            user = user[0]._asdict()
             salt = user["salt"]
             password = verify(salt, password)
             if password == user["password"]:

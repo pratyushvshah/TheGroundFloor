@@ -1,6 +1,10 @@
 
 # Change Log
 
+## [0.0.1] - 2022-07-15
+
+Minor bug fixes to login page.
+
 ## [1.0.0] [Initial Release] - 2022-07-14
 
 Author: Pratyush Shah
