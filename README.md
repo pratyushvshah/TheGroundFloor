@@ -3,7 +3,7 @@
 <!-- PROJECT LOGO -->
 <br />
 <div align="center">
-  <a href="https://github.com/pratyushvshah/TheGroundFoor">
+  <a href="https://github.com/pratyushvshah/TheGroundFloor">
     <img src="logo.ico" alt="Logo" width="80" height="80">
   </a>
 
@@ -95,7 +95,7 @@ There's no instructions, just run `main.py` in your terminal and follow the inst
 - [ ] Make the UI more friendly and add color.
 - [ ] Have the notifications autoupdate.
 
-See the [open issues](https://github.com/pratyushvshah/TheGroundFoor/issues) for a full list of proposed features (and known issues).
+See the [open issues](https://github.com/pratyushvshah/TheGroundFloor/issues) for a full list of proposed features (and known issues).
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
