@@ -4,10 +4,10 @@
 <br />
 <div align="center">
   <a href="https://github.com/pratyushvshah/TheGroundFloor">
-    <img src="logo.ico" alt="Logo" width="80" height="80">
+    <img src="building.ico" alt="Logo" width="80" height="80">
   </a>
 
-<h3 align="center">TheGroundFloor™</h3>
+<h3 align="center">TheGroundFloor™ - Part of The Building project</h3>
 
   <p align="center">
     A CLI for texting your friends
