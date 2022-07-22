@@ -94,6 +94,7 @@ There's no instructions, just run `main.py` in your terminal and follow the inst
 - [ ] Allow sending images and audio files to your friends.
 - [ ] Make the UI more friendly and add color.
 - [ ] Have the notifications autoupdate.
+- [ ] Implement sending messages using websockets.
 
 See the [open issues](https://github.com/pratyushvshah/TheGroundFloor/issues) for a full list of proposed features (and known issues).
 
